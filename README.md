@@ -1,6 +1,7 @@
-# Getting Started with Create React App
+# Albedi Application - Boilerplate
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Esta es una arquitectura probada para iniciar fácil un proyecto.
+_This is am easy tested architecture to start one proyect_
 
 ## Available Scripts
 
