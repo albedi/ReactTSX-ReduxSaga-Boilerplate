@@ -1,47 +1,29 @@
 # Albedi Application - Boilerplate
 
-Esta es una arquitectura probada para iniciar fácil un proyecto.
-_This is am easy tested architecture to start one proyect_
+Esta es una arquitectura probada para iniciar fácil un proyecto. La documentación estará mezclada entre un mal español y un pesimo inglés, lo primemro para fomentar la documentación en español y lo segundo para no dejar de lado a nuestro amigos que intenten entender mi inglés, por ser nativos de ese idioma o algun otro.\
+_This is am easy tested architecture to start one proyect._
 
-## Available Scripts
+## Arquitectura: React-ReduxSaga-Axios
 
-In the project directory, you can run:
+El proyecto tiene un areglo **Redux**-**Saga** y **Axios** para **React**. Siguiento los casos de ejemplo dentro del código se podrá ir creciendo la funcionalidad poco a poco.
+_Only needs to follow the stored examples to increase the functionality of your project._
 
-### `npm start`
+### `index.tsx` The React-Redux Provider
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Este archivo tiene el objetivo de encapusar los módulos y brindar el camino para proveerles el Store a cada uno de ellos.
+_This file is the Store Provider._
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### `App.tsx` Main Routing
 
-### `npm test`
+Este archivo tendrá la función de hacer el ruteo a demanda de la aplicación.
+_This file have the routing function into the application._
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Inicio Module
 
-### `npm run build`
+La organización de carpetas mas recomendada es la de módulos; por lo que, se desarrollará el ejemplo siguiendola.
+_Most recomended folder organization is with Modules. We will use it for this example._
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Structure
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Los módulos tendran su propia estructura de directorios `src/modules/[module_name]`.\
+dentro de cada modulo se encontraran los directorios: `reducers` y .

@@ -1,15 +1,17 @@
-import {createStore, applyMiddleware} from 'redux';
-import createSagaMiddleware from 'redux-saga'
-import mySaga from '../sagas'
+import { createStore, applyMiddleware, combineReducers } from "redux";
+import createSagaMiddleware from "redux-saga";
+import rootSaga from "../sagas";
+
+import mdInicio from "../modules/inicio/reducers";
 
 const sagaMiddleware = createSagaMiddleware();
 
 const initialState = {
   counter: 0,
-}
+};
 
 /**
- * best-pratices 
+ * best-pratices
  * - Avoid having only one reducer.
  *   + So in store.js all you need to do is combine your different reducers.
  * - Proxy access to the state
@@ -18,7 +20,7 @@ const initialState = {
  *   + Actions are in uppercase letters separated by ’_’. Here an example with this action: SET_USERS.
  * - Keep the immutability and readability of your reducers
  *   + const newState = {...state,
- * - Do not use the default case 
+ * - Do not use the default case
  *   + Avoid functional use for default case: switch{ default: return { value: 'bar' } }
  * - Use custom middlewares
  *   + Avoids code duplication.
@@ -30,65 +32,53 @@ const initialState = {
  * - Don’t use useReducer for your business data
  */
 
-function counter(state = initialState, action) {
-  switch (action.type) {
-  case 'INCREMENT':
-    return {...state,counter: state.counter + 1};
-  case 'DECREMENT':
-    return {...state,counter: state.counter - 1};
-  default:
-    // console.log('a c t i o n: ',action.type)
-    return state;
-  }
+function mainState(state = initialState, action) {
+  return state;
 }
 
-/*
-function logger(store) {
-  return function wrapDispatchToAddLogging(next) {
-    return function dispatchAndLog(action) {
-      console.log('dispatching', action)
-      let result = next(action)
-      console.log('next state', store.getState())
-      return result
-    }
-  }
-}
-*/
-const logger = store => next => action => {
+const allReducers = combineReducers({ mainState, mdInicio });
+
+const logger = (store) => (next) => (action) => {
   // agrupamos lo que vamos a mostrar en
   // consola usando el tipo de la acción
   console.group(action.type);
   // mostramos el estado actual del store
-  console.debug('current state', store.getState());
+  console.debug("current state", store.getState());
 
   // mostramos la acción despachada
-  console.debug('action', action);
+  console.debug("action", action);
 
   // empezamos a contar cuanto se tarda en
   // aplicar la acción
-  console.time('duration');
+  console.time(action.type);
 
   // pasamos la acción al store
   next(action);
 
   // terminamos de contar
-  console.timeEnd('duration');
+  console.timeEnd(action.type);
 
   // mostramos el estado nuevo
-  console.debug('new state', store.getState());
+  console.debug("new state", store.getState());
   // terminamos el grupo
   console.groupEnd();
 };
 
-const mainStore = createStore(counter,applyMiddleware(logger,sagaMiddleware));
+// Delete logger middleware if it isn't usefull.
+const mainStore = createStore(
+  allReducers,
+  applyMiddleware(logger, sagaMiddleware)
+);
 
 //console.log(mySaga);
-sagaMiddleware.run(mySaga);
+sagaMiddleware.run(rootSaga);
 
+/**
+ * Siempre es posible suscribirse al Redux para auditar lo que sucede. 
+ * - Is possible to subscribe to the objet to check what is happening. 
 mainStore.subscribe(() => {
   console.log(mainStore.getState())
 });
-
-
+ */
 
 export default mainStore;
