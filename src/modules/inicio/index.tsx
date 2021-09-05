@@ -3,25 +3,46 @@ import { useDispatch, useSelector } from "react-redux";
 import { Container, Row, Col, Alert } from "react-bootstrap";
 import { fndCurrencyVal } from "./reducers/actions";
 import { FcRight } from "react-icons/fc";
-import { Item } from "./types";
+import { InicioMdStt } from "./types";
 import logo from "../../logo.svg";
 import "./index.css";
 
-interface Props {
-  state: { counter: number };
-}
+// Usar cuando se tengar propiedades de entrada.
+// interface Props {
+//   state: { counter: number };
+// }
 
 const MdInicio = () => {
   // Select elements from State
-  const stt = useSelector((state: any) => state.mdInicio);
+  const stt = useSelector((sttSelector: any) => sttSelector.mdInicio);
   console.log("STT:", stt);
 
   const {
     error = undefined,
-    loading = false,
+    // loading = false, Para su uso a futuro.
     toFind = true,
     item = undefined,
-  } = { ...stt };
+  }: InicioMdStt = { ...stt };
+
+  // let rateEUR = 0;
+  let rateMXN = 0;
+  let rateUSD = 0;
+  let errMess;
+
+  // Revisar funcionalidad del EndPoint
+  if (item) {
+    if (item.success) {
+      // rateEUR = item.rates.EUR;
+      rateMXN = item.rates.MXN;
+      rateUSD = item.rates.USD;
+    } else {
+      errMess = (
+        <Row className="errorRow">
+          <Col>{item.error.info}</Col>
+        </Row>
+      );
+    }
+  }
 
   /* Obtenemos el dispatcher por medio del hook y no de los parametros
    * de entrada de la función para hacer un códico más limpio.
@@ -38,10 +59,8 @@ const MdInicio = () => {
 
   useEffect(() => {
     if (!toFind) return;
-    dispatch(fndCurrencyVal("USD"));
+    dispatch(fndCurrencyVal("EUR"));
   }, [dispatch, toFind]);
-
-  const eur = item ? item.rates.EUR : 0;
 
   const rowError = error ? (
     <Row>
@@ -80,14 +99,15 @@ const MdInicio = () => {
         </Row>
         <Row>
           <Col xs="auto" md="auto">
-            1 USD
+            1 EUR
           </Col>
           <Col xs="auto" md="auto">
             <FcRight />
           </Col>
-          <Col>{eur} EUR</Col>
-          <Col>{item ? item.rates.MXN : 0} MXN</Col>
+          <Col>{rateUSD} USD</Col>
+          <Col>{item ? rateMXN : 0} MXN</Col>
         </Row>
+        {errMess}
       </Container>
     </div>
   );

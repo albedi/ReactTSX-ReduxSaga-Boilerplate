@@ -1,9 +1,11 @@
 import ax from "axios";
 
-const URL = "https://api.exchangeratesapi.io/latest";
+const URL = "http://api.exchangeratesapi.io/latest";
+const PRM = "P2FjY2Vzc19rZXk9YWExNzUyODExMjAzZTczMzg2NjI1ZDViYmY2OTAxZjQ=";
 
 export const currencyVal = async (query) => {
-  const GET_URL = `${URL}?base=${query}`;
+  const prmBase = Buffer.from(PRM, "base64").toString();
+  const GET_URL = `${URL}${prmBase}&base=${query}`;
   // console.log("GET_URL", GET_URL);
   return await ax.get(GET_URL).catch((err) => {
     if (err.response) {
