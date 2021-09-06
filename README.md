@@ -3,6 +3,8 @@
 Esta es una arquitectura probada para iniciar fácil un proyecto. La documentación estará mezclada entre un mal español y un pesimo inglés, lo primemro para fomentar la documentación en español y lo segundo para no dejar de lado a nuestro amigos que intenten entender mi inglés, por ser nativos de ese idioma o algun otro.\
 _This is am easy tested architecture to start one proyect._
 
+* Versión actualizada a ``"react": "^17.0.2"``
+
 ## Arquitectura: React-ReduxSaga-Axios
 
 El proyecto tiene un areglo **Redux**-**Saga** y **Axios** para **React**. Siguiento los casos de ejemplo dentro del código se podrá ir creciendo la funcionalidad poco a poco.
