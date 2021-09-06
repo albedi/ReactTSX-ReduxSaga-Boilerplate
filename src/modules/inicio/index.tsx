@@ -93,9 +93,7 @@ const MdInicio = () => {
         </Row>
         {rowError}
         <Row>
-          <Col>
-            ¡Hola Mundo! Que muestra el valor del dólar en este momento.
-          </Col>
+          <Col>¡Hola Mundo! Que muestra el valor del euro en este momento.</Col>
         </Row>
         <Row>
           <Col xs="auto" md="auto">
